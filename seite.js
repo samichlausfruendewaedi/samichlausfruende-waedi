@@ -23,7 +23,37 @@
     var setze = function (offen) {
       knopf.setAttribute("aria-expanded", offen ? "true" : "false");
       menue.classList.toggle("offen", offen);
+      document.documentElement.classList.toggle("menue-offen", offen);
     };
+    // Führt ein Eintrag auf eine andere Seite, bleibt das Menü offen, bis die neue Seite da ist
+    // (so sieht man die alte Seite nicht noch kurz). Nur bei der aktuellen Seite schliessen.
+    menue.addEventListener("click", function (e) {
+      var a = e.target.closest("a");
+      if (!a) return;
+      var ziel = new URL(a.href, location.href);
+      if (ziel.pathname === location.pathname) { setze(false); return; }
+      // Neue Seite soll mit offenem Menü starten und es dann sanft nach oben wegfahren
+      if (menue.classList.contains("offen")) { try { sessionStorage.setItem("menueZu", "1"); } catch (err) {} }
+    });
+    // Kommt man über das Menü auf diese Seite: Menü zuerst offen zeigen, dann sanft schliessen
+    var vomMenue = false;
+    try { vomMenue = sessionStorage.getItem("menueZu") === "1"; sessionStorage.removeItem("menueZu"); } catch (err) {}
+    if (vomMenue && window.innerWidth < 720) {
+      var html = document.documentElement;
+      html.classList.add("ohne-uebergang");
+      setze(true);
+      void menue.offsetHeight;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          html.classList.remove("ohne-uebergang");
+          setTimeout(function () { setze(false); }, 120);
+        });
+      });
+    }
+    // Zurück-Taste: Seite kommt aus dem Zwischenspeicher, Menü dann geschlossen zeigen
+    window.addEventListener("pageshow", function (e) { if (e.persisted) setze(false); });
+    // Wird das Fenster breiter (Computeransicht), das Menü schliessen
+    window.addEventListener("resize", function () { if (window.innerWidth >= 720) setze(false); });
     knopf.addEventListener("click", function () { setze(knopf.getAttribute("aria-expanded") !== "true"); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") { setze(false); knopf.focus(); } });
   }
@@ -84,6 +114,18 @@
     window.addEventListener("load", pruefe);
     pruefe();
   });
+
+  // Pfeil «nach oben» (nur Handy): erscheint, wenn man ein gutes Stück nach unten gescrollt hat
+  var hoch = document.createElement("button");
+  hoch.type = "button";
+  hoch.className = "nach-oben";
+  hoch.setAttribute("aria-label", "Nach oben");
+  hoch.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.body.appendChild(hoch);
+  hoch.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+  var pruefeHoch = function () { hoch.classList.toggle("sichtbar", window.scrollY > window.innerHeight * 1.2); };
+  window.addEventListener("scroll", pruefeHoch, { passive: true });
+  pruefeHoch();
 
   // Karte erst laden, wenn sie im Sichtfeld ist. So springt die Seite nicht,
   // weil die eingebettete Karte den Fokus an sich zieht.
