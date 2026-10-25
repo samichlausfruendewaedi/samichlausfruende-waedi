@@ -61,8 +61,7 @@
         <div id="kinder" aria-live="polite"></div>
 
         <h2>Wunschtermin</h2>
-        <label>1. Wahl <select name="Wunschtermin 1. Wahl" id="wahl1" required></select></label>
-        <label>2. Wahl <select name="Wunschtermin 2. Wahl" id="wahl2" required></select></label>
+        <label>Tag <select name="Wunschtermin" id="wahl1" required></select></label>
 
         <h2>Bemerkungen</h2>
         <label>Haben Sie noch etwas, das wir wissen sollten? <textarea name="Nachricht"></textarea></label>
@@ -81,8 +80,8 @@
 <script>
 (function () {
   var tage = (window.DATEN && window.DATEN.hausbesucheTage) || [];
-  var w1 = document.getElementById("wahl1"), w2 = document.getElementById("wahl2");
-  if (!w1 || !w2) return;
+  var w1 = document.getElementById("wahl1");
+  if (!w1) return;
   function option(text, wert) { var o = document.createElement("option"); o.value = wert; o.textContent = text; return o; }
   function fuelle(sel, liste, platzhalter) {
     sel.innerHTML = "";
@@ -90,14 +89,6 @@
     liste.forEach(function (t) { sel.appendChild(option(t, t)); });
   }
   fuelle(w1, tage, "Bitte wählen");
-  function zweite() {
-    var rest = tage.filter(function (t) { return t !== w1.value; });
-    fuelle(w2, rest, w1.value ? "Bitte wählen" : "Zuerst die 1. Wahl treffen");
-    if (w1.value) w2.appendChild(option("Nur der Tag der 1. Wahl ist möglich", "Nur 1. Wahl möglich"));
-    w2.disabled = !w1.value;
-  }
-  w1.addEventListener("change", zweite);
-  zweite();
   // Pro Kind eine Zeile: Name (breit) und Alter (schmal), passend zur Anzahl Kinder
   var anzahl = document.getElementById("anzahl"), kinder = document.getElementById("kinder");
   if (anzahl && kinder) {
