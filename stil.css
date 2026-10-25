@@ -191,7 +191,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 /* Anmeldung: Kästen mit Angaben in Zeilen */
 .raster .karte.anm { display: flex; flex-direction: column; margin: 0; }
 .karte.anm > h2 { margin-bottom: 0; }
-.karte.anm > p.datum { font-weight: 600; }
+.karte.anm > p.datum { font-weight: 400; }
 .karte.anm > p { margin: 1em 0 0; }
 .eckdaten { display: grid; grid-template-columns: max-content 1fr; gap: .6rem 1.2rem; margin: 0 0 1.4rem; }
 .eckdaten dt { font-weight: 600; color: var(--text); }
