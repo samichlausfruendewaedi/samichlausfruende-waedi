@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hausbesuche – Samichlausfründe Wädi</title>
-<meta name="description" content="Der Samichlaus besucht Familien in Wädenswil zuhause.">
+<title>Anmeldung Hausbesuch – Samichlausfründe Wädi</title>
+<meta name="description" content="Anmeldung für einen Hausbesuch des Samichlaus in Wädenswil.">
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="de_CH">
 <meta property="og:site_name" content="Samichlausfründe Wädi">
-<meta property="og:title" content="Hausbesuche – Samichlausfründe Wädi">
-<meta property="og:description" content="Der Samichlaus besucht Familien in Wädenswil zuhause.">
+<meta property="og:title" content="Anmeldung Hausbesuch – Samichlausfründe Wädi">
+<meta property="og:description" content="Anmeldung für einen Hausbesuch des Samichlaus in Wädenswil.">
 <meta property="og:image" content="https://samichlausfruende-waedi.ch/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="stil.css?v=154">
@@ -24,9 +24,9 @@
     <nav id="hauptmenue" aria-label="Hauptmenü">
     <ul>
       <li><a href="ueber-uns.html">Über uns</a></li>
-      <li><a href="hausbesuche.html" aria-current="page">Hausbesuche</a></li>
+      <li><a href="hausbesuche.html">Hausbesuche</a></li>
       <li><a href="chlaushuesli.html">Chlaushüsli</a></li>
-      <li><a href="anmeldung.html">Anmeldung</a></li>
+      <li><a href="anmeldung.html" aria-current="page">Anmeldung</a></li>
       <li><a href="fa.html">F&amp;A</a></li>
       <li><a href="kontakt.html">Kontakt</a></li>
     </ul>
@@ -34,46 +34,90 @@
   </div>
 </header>
 <main id="inhalt" class="wrap">
-  <h1>Hausbesuche vom Samichlaus</h1>
-  <div class="karte hinweis">
-    <p><strong>Wann:</strong> <span data-feld="hausbesucheDaten"></span></p>
-    <p data-nur-wenn="anmeldungAb"><strong>Anmeldung ab <span data-feld="anmeldungAb"></span> möglich.</strong></p>
+  <h1>Anmeldung Hausbesuch</h1>
+
+  <div class="karte hinweis" data-nur-wenn="anmeldungAb">
+    <p><strong>Die Anmeldung ist ab dem <span data-feld="anmeldungAb"></span> möglich.</strong></p>
   </div>
 
-  <p class="einstieg frage">Kennen Sie die Tradition des Samichlaus-Besuches zu Hause bei den Familien?</p>
+  <div data-nur-wenn-leer="anmeldungAb">
+    <div class="karte">
+      <form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="fc319438-4968-4ef7-b026-263e56fa4032">
+        <input type="hidden" name="from_name" value="Webseite Samichlausfründe Wädi">
+        <input type="hidden" name="subject" value="Anmeldung Hausbesuch">
+        <input type="hidden" name="redirect" value="https://samichlausfruende-waedi.ch/danke-anmeldung.html" data-seite="danke-anmeldung.html">
+        <input type="checkbox" name="botcheck" class="falle" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-  <p>Wir laden Sie herzlich ein, den schönen Brauch des Samichlausbesuchs zu pflegen oder erstmals zu erleben. Unsere Samichläuse und ihre Schmutzlis sind keine polternden, angstmachenden Gesellen. Sie kommen als freundliche, verständnisvolle Menschen in die Familie. Der Samichlaus spricht mit den Kindern einige persönliche Worte. Dazu gehört, dass der Samichlaus neben lobenden Worten für das Kind auch an Dinge erinnert, die es in Zukunft besser machen könnte – wenn Sie dies wünschen (siehe «Lob und Tadel» weiter unten).</p>
-  <p>Der Samichlaus und der Schmutzli freuen sich sehr über ein Sprüchli oder Liedli. Das soll aber freiwillig, altersgerecht und auf keinen Fall erzwungen sein.</p>
-  <p>Zum Abschluss seines Besuches leert der Schmutzli seinen Sack aus und übergibt den Kindern die von Ihnen bereitgestellten Chlaussachen.</p>
+        <h2>Kontaktangaben</h2>
+        <label>Name <input name="name" required autocomplete="name"></label>
+        <label>Strasse und Nr. <input name="Strasse" required autocomplete="street-address"></label>
+        <label>PLZ und Ort <input name="PLZ und Ort" required autocomplete="postal-code"></label>
+        <label>E-Mail <input type="email" name="email" required autocomplete="email"></label>
+        <label>Telefon <input type="tel" name="Telefon" required autocomplete="tel"></label>
 
-  <div class="galerie" tabindex="0" role="region" aria-label="Fotos, seitlich wischen">
-    <figure><img src="img/hausbesuch-stube.jpg" alt="Samichlaus und Schmutzli im Gespräch mit einem Kind in der Stube" loading="lazy" width="400" height="500"></figure>
-    <figure><img src="img/hausbesuch-kinder.jpg" alt="Samichlaus und Schmutzli mit zwei kleinen Kindern" loading="lazy" width="400" height="500"></figure>
-    <figure><img src="img/hausbesuch-laterne.jpg" alt="Ein Schmutzli hilft einem Kind beim Öffnen des Jutesacks, daneben eine Laterne" loading="lazy" width="400" height="500"></figure>
+        <h2>Kinder</h2>
+        <label>Anzahl Kinder <input type="number" id="anzahl" name="Anzahl Kinder" min="1" max="10" required inputmode="numeric"></label>
+        <div id="kinder" aria-live="polite"></div>
+
+        <h2>Wunschtermin</h2>
+        <label>Tag <select name="Wunschtermin" id="wahl1" required></select></label>
+
+        <h2>Bemerkungen</h2>
+        <label>Haben Sie noch etwas, das wir wissen sollten? <textarea name="Nachricht"></textarea></label>
+
+        <p style="font-size:.9rem;margin:0">Mit dem Absenden stimmen Sie unserer <a href="datenschutz.html">Datenschutzerklärung</a> zu.</p>
+        <button class="knopf" type="submit">Senden</button>
+      </form>
+    </div>
   </div>
-
-  <h2>Kosten</h2>
-  <p>Unsere Samichläuse und Schmutzlis machen die Besuche unentgeltlich. Sie nehmen aber gerne eine Spende entgegen. Ihre Spende ist freiwillig und soll sich nach Ihren finanziellen Möglichkeiten richten.</p>
-  <p>Wir empfehlen für einen Hausbesuch 10 bis 20 Franken und pro Kind zusätzlich 10 Franken. Mit den Einnahmen decken wir unsere Auslagen für die Reinigung und Erneuerung der Gewänder und Bärte, die Chlaussachen, Lebkuchen usw. Die Überschüsse spenden wir jedes Jahr an gemeinnützige Projekte oder Organisationen zu Gunsten von Kindern.</p>
-  <p>Den Betrag können Sie beim Hausbesuch unauffällig dem Schmutzli übergeben.</p>
-  <p class="nur-handy" data-nur-wenn-leer="anmeldungAb"><a class="knopf" href="anmeldung.html">Zur Anmeldung</a></p>
-
-  <h2>«Lob und Tadel»</h2>
-  <p>Die Liste «Lob und Tadel» ist für den Samichlaus sehr wichtig, denn sie hilft ihm, in kurzer Zeit das Wesentliche für das Gespräch mit den Kindern zu erfassen. In der Liste können Sie für jedes Kind Eigenschaften eintragen, die vom Samichlaus angesprochen werden sollen. Es sollen einerseits Punkte vorkommen, die das Kind bereits gut macht und für die das Kind vom Samichlaus gelobt werden soll. Andererseits sollen Dinge angesprochen werden, die das Kind noch nicht so gut macht. Es soll vom Samichlaus angestupst werden, was es im kommenden Jahr verbessern kann.</p>
-  <p><strong>Bitte beachten Sie:</strong></p>
-  <ul>
-    <li>gut leserliche Schrift</li>
-    <li>Blatt A4 ausdrucken, nur einseitig</li>
-    <li>Beschränken Sie sich beim Ausfüllen auf eine bis drei Eigenschaften, pro Kind etwa gleich viele</li>
-    <li>Verwenden Sie dem Kind bekannte Wörter, wie beispielsweise «trötzle», «umemuule» usw.</li>
-  </ul>
-  <p>Wir bitten um Verständnis, wenn nicht jeder Punkt angesprochen werden kann.</p>
-  <p><a class="knopf zweit" href="downloads/Lob_und_Tadel.pdf" target="_blank" rel="noopener">Vorlage «Lob und Tadel» (PDF)</a></p>
 </main>
 <footer id="fuss">
   <div class="wrap"><span>© <span data-feld="jahr">2026</span> Samichlausfründe Wädi</span><span><a href="datenschutz.html">Datenschutz</a></span></div>
 </footer>
 <script src="daten.js"></script>
 <script src="seite.js?v=154"></script>
+<script>
+(function () {
+  var tage = (window.DATEN && window.DATEN.hausbesucheTage) || [];
+  var w1 = document.getElementById("wahl1");
+  if (!w1) return;
+  function option(text, wert) { var o = document.createElement("option"); o.value = wert; o.textContent = text; return o; }
+  function fuelle(sel, liste, platzhalter) {
+    sel.innerHTML = "";
+    sel.appendChild(option(platzhalter, ""));
+    liste.forEach(function (t) { sel.appendChild(option(t, t)); });
+  }
+  fuelle(w1, tage, "Bitte wählen");
+  // Pro Kind eine Zeile: Name (breit) und Alter (schmal), passend zur Anzahl Kinder
+  var anzahl = document.getElementById("anzahl"), kinder = document.getElementById("kinder");
+  if (anzahl && kinder) {
+    function zeilen() {
+      var n = parseInt(anzahl.value, 10);
+      if (!(n >= 1)) n = 0;
+      if (n > 10) n = 10;
+      var vorhanden = kinder.querySelectorAll(".kind").length;
+      while (vorhanden > n) { kinder.removeChild(kinder.lastChild); vorhanden--; }
+      while (vorhanden < n) {
+        vorhanden++;
+        var z = document.createElement("div");
+        z.className = "kind";
+        z.innerHTML =
+          '<label>Kind ' + vorhanden + ': Name <input name="Kind ' + vorhanden + ' Name" required autocomplete="off"></label>' +
+          '<label>Alter <input type="number" name="Kind ' + vorhanden + ' Alter" min="0" max="17" required inputmode="numeric"></label>';
+        kinder.appendChild(z);
+      }
+      var hinweis = kinder.querySelector(".hilfe");
+      if (n > 0 && !hinweis) {
+        var h = document.createElement("p"); h.className = "hilfe"; h.textContent = "Alter in Jahren, bei Babys 0.";
+        kinder.insertBefore(h, kinder.firstChild);
+      }
+      if (n === 0 && hinweis) kinder.removeChild(hinweis);
+    }
+    anzahl.addEventListener("input", zeilen);
+    zeilen();
+  }
+})();
+</script>
 </body>
 </html>
