@@ -61,7 +61,17 @@
   // data-feld="name" -> Text ersetzen; data-link="name" -> href setzen
   document.querySelectorAll("[data-feld]").forEach(function (el) {
     var v = D[el.getAttribute("data-feld")];
-    if (v) el.textContent = v;
+    if (!v) return;
+    if (v.indexOf("\n") === -1) { el.textContent = v; return; }
+    // Mehrere Zeilen (z. B. Daten): Handy untereinander, Computer hintereinander mit «|»
+    el.textContent = "";
+    el.classList.add("zeilen");
+    v.split("\n").forEach(function (z) {
+      var s = document.createElement("span");
+      s.className = "zeile";
+      s.textContent = z;
+      el.appendChild(s);
+    });
   });
   document.querySelectorAll("[data-link]").forEach(function (el) {
     var v = D[el.getAttribute("data-link")];

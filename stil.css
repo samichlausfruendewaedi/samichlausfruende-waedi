@@ -284,6 +284,14 @@ main.start { padding-top: 1.6rem; }
 .telnummer { color: var(--text); font-weight: 700; text-decoration: none; white-space: nowrap; }
 .telnummer:hover { color: var(--rot); }
 
-/* Daten untereinander (Zeilenumbrüche aus daten.js) */
-[data-feld="hausbesucheDaten"], [data-feld="chlaushuesliDaten"] { white-space: pre-line; }
-.hinweis [data-feld="hausbesucheDaten"], .hinweis [data-feld="chlaushuesliDaten"] { display: block; margin-top: .2rem; }
+/* Daten mit mehreren Zeilen (aus daten.js): Handy untereinander, Computer hintereinander mit «|» */
+.zeilen .zeile { display: block; }
+.hinweis .zeilen { display: block; margin-top: .2rem; }
+@media (min-width: 720px) {
+  .zeilen .zeile { display: inline; white-space: nowrap; }
+  .zeilen .zeile + .zeile::before { content: "|"; margin: 0 .55em; color: var(--text-leise); font-weight: 400; }
+  .hinweis .zeilen { display: inline; margin-top: 0; }
+  /* In den schmalen Kästen der Anmeldeseite bleiben die Daten untereinander */
+  .karte.anm .zeilen .zeile { display: block; }
+  .karte.anm .zeilen .zeile + .zeile::before { content: none; }
+}
