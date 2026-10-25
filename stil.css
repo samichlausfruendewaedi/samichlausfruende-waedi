@@ -276,3 +276,10 @@ main.start { padding-top: 1.6rem; }
   .menue-offen .nach-oben { opacity: 0; pointer-events: none; }
 }
 @media print { .nach-oben { display: none !important; } }
+
+/* Anmeldung: Kasten Chlaustelefon */
+.karte.telefon { margin-top: 16px; }
+.karte.telefon p { margin: .3rem 0 0; }
+.karte.telefon .telzeile { margin: 0; font-weight: 700; color: var(--text); }
+.telnummer { color: var(--text); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.telnummer:hover { color: var(--rot); }
