@@ -13,11 +13,11 @@ window.DATEN = {
   anmeldungAbDatum: "2026-10-01",
 
   // Slotr-Link für den Besuch im Chlaushüsli
-  hausbesucheDaten: "Freitag, 4., Samstag, 5., und Sonntag, 6. Dezember 2026",
+  hausbesucheDaten: "Freitag 4. Dezember 2026\nSamstag 5. Dezember 2026\nSonntag 6. Dezember 2026",
   // hausbesucheTage: die einzelnen Tage für die Auswahl im Anmeldeformular (Wunschtermin 1. und 2. Wahl)
   hausbesucheTage: ["Freitag, 4. Dezember 2026", "Samstag, 5. Dezember 2026", "Sonntag, 6. Dezember 2026"],
   chlaushuesliLink: "https://slotr.nl/e/V9AWk8jB",
-  chlaushuesliDaten: "Samstag, 5., und Sonntag, 6. Dezember 2026",
+  chlaushuesliDaten: "Samstag 5. Dezember 2026\nSonntag 6. Dezember 2026",
   // Anmeldeschluss, gilt für Hausbesuche und Chlaushüsli
   anmeldeschluss: "Mittwoch, 2. Dezember 2026",
 

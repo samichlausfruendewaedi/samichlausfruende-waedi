@@ -283,3 +283,7 @@ main.start { padding-top: 1.6rem; }
 .karte.telefon .telzeile { margin: 0; font-weight: 700; color: var(--text); }
 .telnummer { color: var(--text); font-weight: 700; text-decoration: none; white-space: nowrap; }
 .telnummer:hover { color: var(--rot); }
+
+/* Daten untereinander (Zeilenumbrüche aus daten.js) */
+[data-feld="hausbesucheDaten"], [data-feld="chlaushuesliDaten"] { white-space: pre-line; }
+.hinweis [data-feld="hausbesucheDaten"], .hinweis [data-feld="chlaushuesliDaten"] { display: block; margin-top: .2rem; }
