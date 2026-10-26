@@ -10,7 +10,7 @@ window.DATEN = {
   // anmeldungAbDatum: dasselbe Datum als Jahr-Monat-Tag, z. B. "2027-11-01".
   // Ab diesem Tag stellt sich die Seite von selbst um: Hinweis weg, Anmeldung sichtbar.
   anmeldungAb: "1. November 2026",
-  anmeldungAbDatum: "2026-10-01",
+  anmeldungAbDatum: "2026-11-01",
 
   // Slotr-Link für den Besuch im Chlaushüsli
   hausbesucheDaten: "Freitag 4. Dezember 2026\nSamstag 5. Dezember 2026\nSonntag 6. Dezember 2026",
