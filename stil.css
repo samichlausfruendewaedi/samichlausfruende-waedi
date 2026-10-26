@@ -24,7 +24,7 @@
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-y: scroll; } /* Rollbalken immer da: kurze Seiten springen nicht zur Seite */
 body {
   margin: 0;
   background: var(--papier);
