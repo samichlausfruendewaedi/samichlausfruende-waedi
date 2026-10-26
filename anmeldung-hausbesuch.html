@@ -14,7 +14,7 @@
 <meta property="og:description" content="Anmeldung für einen Hausbesuch des Samichlaus in Wädenswil.">
 <meta property="og:image" content="https://samichlausfruende-waedi.ch/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="stil.css">
+<link rel="stylesheet" href="stil.css?v=154">
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
@@ -43,7 +43,7 @@
   <div data-nur-wenn-leer="anmeldungAb">
     <div class="karte">
       <form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="1cd1c276-784f-4303-8fb8-d93f177a587a">
+        <input type="hidden" name="access_key" value="fc319438-4968-4ef7-b026-263e56fa4032">
         <input type="hidden" name="from_name" value="Webseite Samichlausfründe Wädi">
         <input type="hidden" name="subject" value="Anmeldung Hausbesuch">
         <input type="hidden" name="redirect" value="https://samichlausfruende-waedi.ch/danke-anmeldung.html" data-seite="danke-anmeldung.html">
@@ -61,8 +61,7 @@
         <div id="kinder" aria-live="polite"></div>
 
         <h2>Wunschtermin</h2>
-        <label>1. Wahl <select name="Wunschtermin 1. Wahl" id="wahl1" required></select></label>
-        <label>2. Wahl <select name="Wunschtermin 2. Wahl" id="wahl2" required></select></label>
+        <label>Tag <select name="Wunschtermin" id="wahl1" required></select></label>
 
         <h2>Bemerkungen</h2>
         <label>Haben Sie noch etwas, das wir wissen sollten? <textarea name="Nachricht"></textarea></label>
@@ -77,12 +76,12 @@
   <div class="wrap"><span>© <span data-feld="jahr">2026</span> Samichlausfründe Wädi</span><span><a href="datenschutz.html">Datenschutz</a></span></div>
 </footer>
 <script src="daten.js"></script>
-<script src="seite.js"></script>
+<script src="seite.js?v=154"></script>
 <script>
 (function () {
   var tage = (window.DATEN && window.DATEN.hausbesucheTage) || [];
-  var w1 = document.getElementById("wahl1"), w2 = document.getElementById("wahl2");
-  if (!w1 || !w2) return;
+  var w1 = document.getElementById("wahl1");
+  if (!w1) return;
   function option(text, wert) { var o = document.createElement("option"); o.value = wert; o.textContent = text; return o; }
   function fuelle(sel, liste, platzhalter) {
     sel.innerHTML = "";
@@ -90,14 +89,6 @@
     liste.forEach(function (t) { sel.appendChild(option(t, t)); });
   }
   fuelle(w1, tage, "Bitte wählen");
-  function zweite() {
-    var rest = tage.filter(function (t) { return t !== w1.value; });
-    fuelle(w2, rest, w1.value ? "Bitte wählen" : "Zuerst die 1. Wahl treffen");
-    if (w1.value) w2.appendChild(option("Nur der Tag der 1. Wahl ist möglich", "Nur 1. Wahl möglich"));
-    w2.disabled = !w1.value;
-  }
-  w1.addEventListener("change", zweite);
-  zweite();
   // Pro Kind eine Zeile: Name (breit) und Alter (schmal), passend zur Anzahl Kinder
   var anzahl = document.getElementById("anzahl"), kinder = document.getElementById("kinder");
   if (anzahl && kinder) {
