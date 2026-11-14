@@ -7,6 +7,13 @@
     var t = new Date(), heute = t.getFullYear() + "-" + ("0" + (t.getMonth() + 1)).slice(-2) + "-" + ("0" + t.getDate()).slice(-2);
     if (heute >= D.anmeldungAbDatum) D.anmeldungAb = "";
   }
+  // Hausbesuch-Daten mit «– ausgebucht» bei vollen Tagen (für die Seite Anmeldung)
+  if (D.hausbesucheTage) {
+    var voll = D.hausbesucheAusgebucht || [];
+    D.hausbesucheDatenMitStatus = D.hausbesucheTage.map(function (t) {
+      return voll.indexOf(t) > -1 ? t + " – ausgebucht" : t;
+    }).join("\n");
+  }
   document.documentElement.classList.add("js");
   // Kopf und Fusszeile stehen fest in jeder Seite (Menü funktioniert so auch ohne JavaScript).
   // Hier kommt nur der Menüknopf für das Handy dazu.

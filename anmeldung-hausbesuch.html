@@ -14,7 +14,7 @@
 <meta property="og:description" content="Anmeldung für einen Hausbesuch des Samichlaus in Wädenswil.">
 <meta property="og:image" content="https://samichlausfruende-waedi.ch/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="stil.css?v=172">
+<link rel="stylesheet" href="stil.css?v=173">
 </head>
 <body>
 <a class="skip" href="#inhalt">Zum Inhalt springen</a>
@@ -75,8 +75,8 @@
 <footer id="fuss">
   <div class="wrap"><span>© <span data-feld="jahr">2026</span> Samichlausfründe Wädi</span><span><a href="datenschutz.html">Datenschutz</a></span></div>
 </footer>
-<script src="daten.js?v=172"></script>
-<script src="seite.js?v=172"></script>
+<script src="daten.js?v=173"></script>
+<script src="seite.js?v=173"></script>
 <script>
 (function () {
   var tage = (window.DATEN && window.DATEN.hausbesucheTage) || [];
@@ -86,8 +86,13 @@
   function fuelle(sel, liste, platzhalter) {
     sel.innerHTML = "";
     sel.appendChild(option(platzhalter, ""));
-    liste.forEach(function (t) { sel.appendChild(option(t, t)); });
+    liste.forEach(function (t) {
+      var o = option(t, t);
+      if (voll.indexOf(t) > -1) { o.textContent = t + " – ausgebucht"; o.disabled = true; }
+      sel.appendChild(o);
+    });
   }
+  var voll = (window.DATEN && window.DATEN.hausbesucheAusgebucht) || [];
   fuelle(w1, tage, "Bitte wählen");
   // Pro Kind eine Zeile: Name (breit) und Alter (schmal), passend zur Anzahl Kinder
   var anzahl = document.getElementById("anzahl"), kinder = document.getElementById("kinder");

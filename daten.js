@@ -16,6 +16,9 @@ window.DATEN = {
   hausbesucheDaten: "Freitag, 4. Dezember 2026\nSamstag, 5. Dezember 2026\nSonntag, 6. Dezember 2026",
   // hausbesucheTage: die einzelnen Tage für die Auswahl im Anmeldeformular (Wunschtermin 1. und 2. Wahl)
   hausbesucheTage: ["Freitag, 4. Dezember 2026", "Samstag, 5. Dezember 2026", "Sonntag, 6. Dezember 2026"],
+  // hausbesucheAusgebucht: Tage, die voll sind. Sie stehen im Formular grau und lassen sich nicht wählen.
+  // Genau gleich schreiben wie oben bei hausbesucheTage. Keine ausgebuchten Tage: []
+  hausbesucheAusgebucht: ["Sonntag, 6. Dezember 2026"],
   chlaushuesliLink: "https://slotr.nl/e/GvSXUcWa",
   chlaushuesliDaten: "Samstag, 5. Dezember 2026\nSonntag, 6. Dezember 2026",
   // Anmeldeschluss, gilt für Hausbesuche und Chlaushüsli
